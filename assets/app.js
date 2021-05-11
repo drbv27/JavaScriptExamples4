@@ -47,6 +47,28 @@ const prim = (num=undefined) =>{
 }
 prim()
 
+//E1S4 moreValidations and another "for"
+
+const numeroPrimo = (num=undefined) => {
+    if (num===undefined) return console.warn("No ingresaste un número");
+    if (typeof num !== "number") return console.error(`El valor "${num}" no es un numero`);
+    if(num===0) return console.error("El numero no puede ser cero");
+    if(Math.sign(num)===-1) return console.error("El numero no puede ser negativo");
+
+    let divisible =false;
+
+    for (let i=2; i<num; i++){
+        if((num%i)===0){
+            divisible = true;
+            break;
+        }
+    }
+    return(divisible)
+    ?console.log(`El numero ${num} NO es primo`)
+    :console.log(`El numero ${num} es primo`)
+}
+numeroPrimo(11)
+
 //--------------------------------------------------------------------------------------------
 
 //E13S1.Solución Simple
@@ -78,15 +100,26 @@ console.log("Ejercicio 14:")
 
 function CelciusFarenheit(val=undefined,degree="") {
     if (val===undefined) return console.warn('No digitaste un valor')
-    console.log(degree)
     if (degree === "c"||degree === "f"||degree === "C"||degree === "F")
-    {    (degree===("c"||"C"))
-    ?console.log(`"${val}"°C son iguales a "${(val*1.8)+32}"°F`)
-    :console.log(`"${val}"°F son iguales a "${(val-32)/1.8}"°C`)}
+    {  (degree===("c"||"C"))
+        ?console.log(`"${val}"°C son iguales a "${(val*1.8)+32}"°F`)
+        :console.log(`"${val}"°F son iguales a "${(val-32)/1.8}"°C`)}
     else{
         return console.log('Debes digitar "C" o "F"')
     }
-
-
 }
 CelciusFarenheit(24,"c")
+
+//E14S2 More validations
+const convertirGrados = (grados=undefined, unidad=undefined) =>{
+    if (grados===undefined) return console.warn('No digitaste un valor')
+    if (typeof grados !== "number") return console.error(`El valor "${grados}" no es un numero`);
+    if (unidad === undefined) return console.warn('No ingresaste el tipo de grados a convertir');
+    if (typeof unidad !== "string") return console.error(`El valor "${unidad}" no es texto`);
+    if (unidad.length !== 1 || !/(C|F)/i.test(unidad)) return console.warn("Valor de unidad no reconocido");
+
+    (unidad===("c"||"C"))
+    ?console.log(`"${grados}"°C son iguales a "${Math.round((grados*1.8)+32)}"°F`)
+    :console.log(`"${grados}"°F son iguales a "${Math.round((grados-32)/1.8)}"°C`)
+}
+convertirGrados(2,"F")
